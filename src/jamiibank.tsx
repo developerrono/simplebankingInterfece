@@ -25,6 +25,14 @@ const JamiiBank = () => {
   const [signupEmail, setSignupEmail] = useState('');
   const cryptoRate = 0.0000065;
 
+  // Define missing type for BeforeInstallPromptEvent
+interface BeforeInstallPromptEvent extends Event {
+  readonly platforms: string[];
+  prompt(): Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
+
+  
   // Changed localStorage keys to 'jamiibank_'
   useEffect(() => {
     const savedUser = localStorage.getItem('jamiibank_user');
@@ -328,7 +336,7 @@ const JamiiBank = () => {
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h1 className="text-3xl font-bold text-gray-800">Jamii Bank</h1>
-                <p className="text-sm text-gray-500">Smart Banking in Ksh</p>
+                <p className="text-sm text-gray-500">Smart Banking </p>
               </div>
               <button onClick={() => setIsMenuOpen(true)} className="p-3 hover:bg-gray-100 rounded-full transition">
                 <Menu className="w-6 h-6" />
@@ -575,5 +583,6 @@ const JamiiBank = () => {
     </div>
   );
 };
+
 
 export default JamiiBank;
